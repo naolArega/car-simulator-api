@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+	<connectionStrings>
+		<add name="CarSimulatorApiDB" connectionString="connection string goes here" providerName="provider name here"/>
+	</connectionStrings>
+
+</configuration>
