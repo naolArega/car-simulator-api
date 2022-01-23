@@ -14,8 +14,8 @@ namespace car_simulator_api.Services
 
             return connection.Query<PlayerModel>(
                 "ProcPlayerGetAll",
-                commandType: CommandType.StoredProcedure
-                ).ToList();
+                commandType: CommandType.StoredProcedure)
+                .ToList();
         }
 
         public static PlayerModel? GetAPlayer(Guid id)
@@ -25,8 +25,8 @@ namespace car_simulator_api.Services
             return connection.Query<PlayerModel>(
                 "ProcPlayerGetById",
                 new { Id = id },
-                commandType: CommandType.StoredProcedure
-                ).FirstOrDefault();
+                commandType: CommandType.StoredProcedure)
+                .FirstOrDefault();
         }
 
         public static int InsertPlayer(PlayerModel player)
@@ -36,8 +36,27 @@ namespace car_simulator_api.Services
             return connection.Execute(
                 "ProcPlayerInsert",
                 player,
-                commandType: CommandType.StoredProcedure
-                );
+                commandType: CommandType.StoredProcedure);
+        }
+
+        public static int UpdatePlayer(PlayerModel player)
+        {
+            using SqlConnection connection = new(GeneralOption.SqlServerConnectionString);
+
+            return connection.Execute(
+                "ProcPlayerUpdate",
+                player,
+                commandType: CommandType.StoredProcedure);
+        }
+
+        public static int DeletePlayer(Guid id)
+        {
+            using SqlConnection connection = new(GeneralOption.SqlServerConnectionString);
+
+            return connection.Execute(
+                "ProcPlayerDelete",
+                new { Id = id },
+                commandType: CommandType.StoredProcedure);
         }
     }
 }
